@@ -23,20 +23,20 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, AFHTTPRequestLoggerLevel) {
-  AFLoggerLevelOff,
-  AFLoggerLevelDebug,
-  AFLoggerLevelInfo,
-  AFLoggerLevelWarn,
-  AFLoggerLevelError,
-  AFLoggerLevelFatal = AFLoggerLevelOff,
+    AFLoggerLevelOff,
+    AFLoggerLevelDebug,
+    AFLoggerLevelInfo,
+    AFLoggerLevelWarn,
+    AFLoggerLevelError,
+    AFLoggerLevelFatal = AFLoggerLevelOff,
 };
 
 /**
  `AFNetworkActivityLogger` logs requests and responses made by AFNetworking, with an adjustable level of detail.
  
  Applications should enable the shared instance of `AFNetworkActivityLogger` in `AppDelegate -application:didFinishLaunchingWithOptions:`:
-
-        [[AFNetworkActivityLogger sharedLogger] startLogging];
+ 
+ [[AFNetworkActivityLogger sharedLogger] startLogging];
  
  `AFNetworkActivityLogger` listens for `AFNetworkingOperationDidStartNotification` and `AFNetworkingOperationDidFinishNotification` notifications, which are posted by AFNetworking as request operations are started and finish. For further customization of logging output, users are encouraged to implement desired functionality by listening for these notifications.
  */
@@ -53,6 +53,7 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestLoggerLevel) {
  @discussion Each notification has an associated `NSURLRequest`. To filter out request and response logging, such as all network activity made to a particular domain, this predicate can be set to match against the appropriate URL string pattern.
  */
 @property (nonatomic, strong) NSPredicate *filterPredicate;
+@property (nonatomic, strong) NSString *networkLog;
 
 /**
  Returns the shared logger instance.
@@ -77,9 +78,9 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestLoggerLevel) {
 
 /**
  ## Logging Levels
-
+ 
  The following constants specify the available logging levels for `AFNetworkActivityLogger`:
-
+ 
  enum {
  AFLoggerLevelOff,
  AFLoggerLevelDebug,
@@ -88,22 +89,22 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestLoggerLevel) {
  AFLoggerLevelError,
  AFLoggerLevelFatal = AFLoggerLevelOff,
  }
-
+ 
  `AFLoggerLevelOff`
  Do not log requests or responses.
-
+ 
  `AFLoggerLevelDebug`
  Logs HTTP method, URL, header fields, & request body for requests, and status code, URL, header fields, response string, & elapsed time for responses.
  
  `AFLoggerLevelInfo`
  Logs HTTP method & URL for requests, and status code, URL, & elapsed time for responses.
-
+ 
  `AFLoggerLevelWarn`
  Logs HTTP method & URL for requests, and status code, URL, & elapsed time for responses, but only for failed requests.
  
  `AFLoggerLevelError`
  Equivalent to `AFLoggerLevelWarn`
-
+ 
  `AFLoggerLevelFatal`
  Equivalent to `AFLoggerLevelOff`
-*/
+ */
